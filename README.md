@@ -11,7 +11,7 @@ Para clonar este repositório, você pode usar o seguinte comando Git:
 ```
 git clone https://github.com/Inacioluz/fundamentos-node-js.git
 ``` 
-##Exemplo de comandos de instalação
+Exemplo de comandos de instalação
 ```
  npm install
 ```
