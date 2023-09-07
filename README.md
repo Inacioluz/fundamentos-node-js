@@ -5,18 +5,17 @@ Essa aplicação back-end é uma projeto feito com apoio da Rocketseat, nele imp
 
 ## Tabela de Conteúdo
 - [Node.js](#tecnologias)
-- [Instalação](#instalação)
-- [Como Usar](#como-usar)
-- [Endpoints](#endpoints)
-- [Contribuição](#contribuição)
-- [Licença](#licença)
+- [JavaScript](#tecnologias)
 
-## Tecnologias
-Liste as principais tecnologias que você usou para desenvolver o backend, como linguagens de programação, frameworks, bancos de dados, etc.
+Para clonar este repositório, você pode usar o seguinte comando Git:
 
-## Instalação
-Forneça instruções detalhadas sobre como instalar e configurar o seu projeto localmente. Você pode incluir comandos específicos, dependências necessárias e qualquer configuração especial.
+```bash
+git clone https://github.com/seu-usuario/meu-projeto.git
+
+
 
 ```bash
 # Exemplo de comandos de instalação
 npm install
+
+
