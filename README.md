@@ -9,13 +9,11 @@ Essa aplicação back-end é uma projeto feito com apoio da Rocketseat, nele imp
 
 Para clonar este repositório, você pode usar o seguinte comando Git:
 
-```bash
-git clone https://github.com/seu-usuario/meu-projeto.git
-
-
-
-```bash
-# Exemplo de comandos de instalação
-npm install
+             ```bash
+  git clone https://github.com/Inacioluz/fundamentos-node-js.git
+         
+              ```bash
+  # Exemplo de comandos de instalação
+    npm install
 
 
