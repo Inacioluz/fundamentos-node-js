@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 
 const databasePath = new URL('../db.json', import.meta.url)
 
-console.log(databasePath)
+console.log()
 
 export class Database {
   #database = {}

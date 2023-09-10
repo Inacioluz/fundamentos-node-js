@@ -1,38 +1,20 @@
-import fs from 'node:fs/promises'
+import http from 'node:http'
+import { json } from './middlewares/json.js'
+import { routes } from './routes.js'
 
-const databasePath = new URL('../db.json', import.meta.url)
+const server = http.createServer(async (req, res) => {
+  const { method, url } = req
 
-export class Database {
-  #database = {}
+  await json(req, res)
 
-  constructor() {
-    fs.readFile(databasePath, 'utf8')
-      .then(data => {
-        this.#database = JSON.parse(data)
-      })
-      .catch(() => {
-        this.#persist()
-      })
+  const route = routes.find(route => {
+    return route.method === method && route.path === url
+  })
+
+  if (route) {
+    return route.handler(req, res)
   }
 
-  #persist() {
-    fs.writeFile(databasePath, JSON.stringify(this.#database))
-  }
-
-  select(table) {
-    const data = this.#database[table] ?? []
-
-    return data
-  }
-  insert(table, data) {
-    if (Array.isArray(this.#database[table])) {
-      this.#database[table].push(data)
-    } else {
-      this.#database[table] = [data]
-    }
-
-    this.#persist()
-
-    return data
-  }
-}
+  return res.writeHead(404).end()
+})
+server.listen(3333)
