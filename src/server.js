@@ -1,34 +1,38 @@
-import http from 'node:http'
-import { json } from './middlewares/json.js'
-import { Database } from './database.js'
+import fs from 'node:fs/promises'
 
+const databasePath = new URL('../db.json', import.meta.url)
 
-const database = new Database()
+export class Database {
+  #database = {}
 
-const server = http.createServer(async(req, res) => {
-    const { method, url } = req 
+  constructor() {
+    fs.readFile(databasePath, 'utf8')
+      .then(data => {
+        this.#database = JSON.parse(data)
+      })
+      .catch(() => {
+        this.#persist()
+      })
+  }
 
-    await json(req, res)
+  #persist() {
+    fs.writeFile(databasePath, JSON.stringify(this.#database))
+  }
 
-    if ( method === 'GET' && url === '/users') {
-        const users = database.select('users')
+  select(table) {
+    const data = this.#database[table] ?? []
 
-        return res.end(JSON.stringify(users))
+    return data
+  }
+  insert(table, data) {
+    if (Array.isArray(this.#database[table])) {
+      this.#database[table].push(data)
+    } else {
+      this.#database[table] = [data]
     }
 
-    if ( method === 'POST' && url === '/users' ) {
-        const { name, email } = req.body
-        const user = {
-            id: 1,
-            name,
-            email,
-        }
+    this.#persist()
 
-        database.insert('users', user)
-
-        return res.writeHead(201).end()
-    }
-    return res.writeHead(404).end('Not found');
-})
-
-server.listen(3333)
+    return data
+  }
+}
